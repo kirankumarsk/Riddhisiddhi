@@ -107,10 +107,132 @@
         </div>
     </div>
     <!-- Page Header End -->
-
+    <div id="gallery-container" href="./img1/img/navaratri dandia/1.jpg">
+    </div>
+    <div class="modal" id="modal">
+        <span class="close" id="close">&times;</span>
+        <img id="modal-img">
+        <div class="nav-buttons">
+            <button id="prev">&#9665; Previous</button>
+            <button id="next">Next &#9655;</button>
+        </div>
+    </div>
+    <script>
+        const sections = {
+            "Letter of Appreciation": [
+                "./img1/letter/1.jpg",
+                "./img1/letter/2.jpg",
+                "./img1/letter/3.jpg",
+                "./img1/letter/4.jpg",
+                "./img1/letter/5.jpg",
+                "./img1/letter/6.jpg",
+                "./img1/letter/7.jpg",
+                "./img1/letter/8.jpg",
+                "./img1/letter/9.jpg",
+                "./img1/letter/10.jpg",
+                "./img1/letter/11.jpg",
+                "./img1/letter/12.jpg",
+                "./img1/letter/13.jpg",
+                "./img1/letter/14.jpg",
+                "./img1/letter/15.jpg",
+                "./img1/letter/16.jpg",
+                "./img1/letter/17.jpg",
+                "./img1/letter/18.jpg",
+                "./img1/letter/19.jpg",
+                "./img1/letter/20.jpg",
+                "./img1/letter/21.jpg",
+                "./img1/letter/22.jpg",
+                "./img1/letter/23.jpg",
+                "./img1/letter/24.jpg",
+                "./img1/letter/25.jpg",
+                "./img1/letter/26.jpg",
+                "./img1/letter/27.jpg",
+                "./img1/letter/28.jpg",
+                "./img1/letter/29.jpg",
+                "./img1/letter/30.jpg",
+                "./img1/letter/31.jpg",
+                "./img1/letter/32.jpg",
+                "./img1/letter/33.jpg",
+                "./img1/letter/34.jpg",
+                "./img1/letter/35.jpg",
+                "./img1/letter/36.jpg"
+            ],
+            "Awards and Honor": [
+                
+                "./img1/awards/5.jpg",
+                "./img1/awards/6.jpg",
+                "./img1/awards/3.jpg",
+                "./img1/awards/4.jpg",
+                "./img1/awards/1.jpg",
+                "./img1/awards/7.jpg",
+                "./img1/awards/8.jpg"
+            ],
+            "": [
+                
+            "./img1/awards/39.jpg",
+                "./img1/awards/39 20.jpg",
+                "./img1/awards/39 19.jpg",
+            ],
+            
+        };
+        
+        const galleryContainer = document.getElementById("gallery-container");
+        for (const section in sections) {
+            let sectionDiv = document.createElement("div");
+            sectionDiv.classList.add("section");
+            let heading = document.createElement("h3");
+            heading.textContent = section;
+            sectionDiv.appendChild(heading);
+            let galleryDiv = document.createElement("div");
+            galleryDiv.classList.add("gallery");
+            sections[section].forEach(src => {
+                let img = document.createElement("img");
+                img.src = src;
+                img.alt = section;
+                galleryDiv.appendChild(img);
+            });
+            sectionDiv.appendChild(galleryDiv);
+            galleryContainer.appendChild(sectionDiv);
+        }
+        
+        const modal = document.getElementById("modal");
+        const modalImg = document.getElementById("modal-img");
+        const close = document.getElementById("close");
+        const prevBtn = document.getElementById("prev");
+        const nextBtn = document.getElementById("next");
+        let images = [];
+        let currentIndex = 0;
+        
+        document.addEventListener("click", (e) => {
+            if (e.target.tagName === "IMG" && e.target.closest(".gallery")) {
+                images = Array.from(e.target.closest(".gallery").getElementsByTagName("img"));
+                currentIndex = images.indexOf(e.target);
+                showImage(currentIndex);
+            }
+        });
+        
+        close.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+        
+        prevBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            showImage(currentIndex);
+        });
+        
+        nextBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            showImage(currentIndex);
+        });
+        
+        function showImage(index) {
+            modal.style.display = "flex";
+            modalImg.src = images[index].src;
+        }
+    </script>
 
     <!-- Team Start -->
-    <div class="container-xxl py-5">
+    <!-- <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
                 <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Team Members</div>
@@ -183,7 +305,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Team End -->
 
 
@@ -210,11 +332,11 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Quick Links</h5>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Our Services</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">Support</a>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="service.html">Our Services</a>
+                    <a class="btn btn-link" href="causes.html">Causes</a>
+                    <a class="btn btn-link" href="gallery.html">Gallery</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <!-- <h5 class="text-light mb-4">Newsletter</h5> -->
